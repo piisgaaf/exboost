@@ -55,7 +55,9 @@ defmodule Exboost.MixProject do
         tag: "boost-1.67.0",
         submodules: true,
         compile: "./bootstrap.sh --with-libraries=math; ./b2 headers; ./b2 link=static runtime-link=static threading=single stage",
-        app: false}
+        app: false,
+        only: :dev},
+      {:ex_doc, "~> 0.16", only: :dev, runtime: false}
     ]
   end
 
@@ -70,7 +72,7 @@ defmodule Exboost.MixProject do
     [
       maintainers: [ "Pieter Rijken" ],
       licenses: [ "Boost 1.0" ],
-      files: [ "lib", "mix.exs", "test", "priv/*.c", "README*", "LICENSE*" ],
+      files: [ "lib", "mix.exs", "test", "Makefile", "priv/*.c", "README*", "LICENSE*", "priv/libboostnif.so" ],
       links: %{ "GitHub" => "https://github.com/piisgaaf/exboost" }
     ]
   end

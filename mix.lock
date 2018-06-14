@@ -1,0 +1,3 @@
+%{
+  "boost": {:git, "https://github.com/boostorg/boost.git", "1a9dda41fbfb0dfbec17ab6afeba8138265395f7", [tag: "boost-1.67.0", submodules: true]},
+}

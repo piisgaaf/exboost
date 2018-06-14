@@ -51,7 +51,7 @@ defmodule Exboost.MixProject do
   defp deps do
     [
       {:boost,
-        git: "https://github.com/boostorg/boost.git",
+        github: "boostorg/boost",
         tag: "boost-1.67.0",
         submodules: true,
         compile: "./bootstrap.sh --with-libraries=math; ./b2 headers; ./b2 link=static runtime-link=static threading=single stage",

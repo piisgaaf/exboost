@@ -28,7 +28,7 @@ defmodule Exboost.Math do
   app = Mix.Project.config[:app]
   
   def init() do
-    path = :filename.join(:code.priv_dir(unquote(app)), 'libboostnif')
+    path = :filename.join(:code.priv_dir(unquote(app)), 'libboostnif') |> IO.inspect
     :ok = :erlang.load_nif(path, 0)
   end
 
@@ -44,7 +44,56 @@ defmodule Exboost.Math do
       0.0
 
   """
+  @spec gamma_p(a::float,z::float) :: float
   def gamma_p(a,z), do: _gamma_p(a,z)
   def _gamma_p(_a,_z), do: "NIF library not loaded"
+
+  @doc """
+  Implements the inverse of the regularized incomplete gamma function.
+
+  ## Examples:
+
+      iex> Exboost.Math.gamma_p_inv(0.234,0.9891753004794075)
+      2.3
+
+      iex> Exboost.Math.gamma_p_inv(5.0,0.0)
+      0.0
+
+  """
+  @spec gamma_p_inv(a::float,p::float) :: float
+  def gamma_p_inv(a,p), do: _gamma_p_inv(a,p)
+  def _gamma_p_inv(_a,_z), do: "NIF library not loaded"
+
+  @doc """
+  Provides the non-regularized lower incomplete gamma function.
+  
+  ## Examples
+
+      iex> Exboost.Math.tgamma_lower(0.234,2.3)
+      3.8461476736289315
+
+      iex> Exboost.Math.tgamma_lower(5.0,0.0)
+      0.0
+
+  """
+  @spec tgamma_lower(a::float,z::float) :: float
+  def tgamma_lower(a,z), do: _tgamma_lower(a,z)
+  def _tgamma_lower(_a,_z), do: "NIF library not loaded"
+
+  @doc """
+  Provides the gamma function.
+  
+  ## Examples
+
+      iex> Exboost.Math.tgamma(1.5)
+      0.886226925452758
+
+      iex> Exboost.Math.tgamma(3.0)
+      2.0
+
+  """
+  @spec tgamma(z::float) :: float
+  def tgamma(z), do: _tgamma(z)
+  def _tgamma(_z), do: "NIF library not loaded"
 
 end

@@ -33,6 +33,18 @@ DEALINGS IN THE SOFTWARE.
 
 #define MAXBUFLEN 1024
 
+static ERL_NIF_TERM _tgamma(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
+{
+    double z;
+    long double res;
+    
+    enif_get_double(env, argv[0], &z);
+
+    res = boost::math::tgamma((long double)z);
+    
+    return enif_make_double(env, res);
+}
+
 static ERL_NIF_TERM _gamma_p(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
 {
     double a;
@@ -47,8 +59,39 @@ static ERL_NIF_TERM _gamma_p(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[]
     return enif_make_double(env, res);
 }
 
+static ERL_NIF_TERM _tgamma_lower(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
+{
+    double a;
+    double z;
+    long double res;
+    
+    enif_get_double(env, argv[0], &a);
+    enif_get_double(env, argv[1], &z);
+
+    res = boost::math::tgamma_lower((long double)a, (long double)z);
+    
+    return enif_make_double(env, res);
+}
+
+static ERL_NIF_TERM _gamma_p_inv(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
+{
+    double a;
+    double p;
+    long double res;
+    
+    enif_get_double(env, argv[0], &a);
+    enif_get_double(env, argv[1], &p);
+
+    res = boost::math::gamma_p_inv((long double)a, (long double)p);
+    
+    return enif_make_double(env, res);
+}
+
 static ErlNifFunc nif_funcs[] =
 {
-  {"_gamma_p", 2, _gamma_p}
+  {"_tgamma", 1, _tgamma},
+  {"_gamma_p", 2, _gamma_p},
+  {"_tgamma_lower", 2, _tgamma_lower},
+  {"_gamma_p_inv", 2, _gamma_p_inv}
 };
 ERL_NIF_INIT(Elixir.Exboost.Math,nif_funcs,NULL,NULL,NULL,NULL)

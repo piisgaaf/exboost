@@ -40,9 +40,13 @@ static ERL_NIF_TERM _tgamma(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
     
     enif_get_double(env, argv[0], &z);
 
-    res = boost::math::tgamma((long double)z);
-    
-    return enif_make_double(env, res);
+    try {
+        res = boost::math::tgamma((long double)z);
+        return enif_make_double(env, res);
+    }
+    catch(boost::exception const& ex) {
+        return enif_raise_exception(env, enif_make_atom(env,"boostError"));
+    }
 }
 
 static ERL_NIF_TERM _gamma_p(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
@@ -54,9 +58,13 @@ static ERL_NIF_TERM _gamma_p(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[]
     enif_get_double(env, argv[0], &a);
     enif_get_double(env, argv[1], &z);
 
-    res = boost::math::gamma_p((long double)a, (long double)z);
-    
-    return enif_make_double(env, res);
+    try {
+        res = boost::math::gamma_p((long double)a, (long double)z);
+        return enif_make_double(env, res);
+    }
+    catch(boost::exception const& ex) {
+        return enif_raise_exception(env, enif_make_atom(env,"boostError"));
+    }
 }
 
 static ERL_NIF_TERM _tgamma_lower(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
@@ -68,9 +76,13 @@ static ERL_NIF_TERM _tgamma_lower(ErlNifEnv* env, int argc, const ERL_NIF_TERM a
     enif_get_double(env, argv[0], &a);
     enif_get_double(env, argv[1], &z);
 
-    res = boost::math::tgamma_lower((long double)a, (long double)z);
-    
-    return enif_make_double(env, res);
+    try {
+        res = boost::math::tgamma_lower((long double)a, (long double)z);
+        return enif_make_double(env, res);
+    }
+    catch(boost::exception const& ex) {
+        return enif_raise_exception(env, enif_make_atom(env,"boostError"));
+    }
 }
 
 static ERL_NIF_TERM _gamma_p_inv(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
@@ -82,9 +94,13 @@ static ERL_NIF_TERM _gamma_p_inv(ErlNifEnv* env, int argc, const ERL_NIF_TERM ar
     enif_get_double(env, argv[0], &a);
     enif_get_double(env, argv[1], &p);
 
-    res = boost::math::gamma_p_inv((long double)a, (long double)p);
-    
-    return enif_make_double(env, res);
+    try {
+        res = boost::math::gamma_p_inv((long double)a, (long double)p);
+        return enif_make_double(env, res);
+    }
+    catch(boost::exception const& ex) {
+        return enif_raise_exception(env, enif_make_atom(env,"boostError"));
+    }
 }
 
 static ErlNifFunc nif_funcs[] =

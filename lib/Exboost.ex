@@ -53,7 +53,7 @@ defmodule Exboost.Math do
 
   ## Examples:
 
-      iex> Exboost.Math.gamma_p_inv(0.234,0.9891753004794075)
+      iex> Exboost.Math.gamma_p_inv(0.234,0.9891753004794075) |> Float.round(6)
       2.3
 
       iex> Exboost.Math.gamma_p_inv(5.0,0.0)

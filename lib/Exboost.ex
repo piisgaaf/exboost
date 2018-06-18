@@ -45,7 +45,8 @@ defmodule Exboost.Math do
 
   """
   @spec gamma_p(a::float,z::float) :: float
-  def gamma_p(a,z), do: _gamma_p(a,z)
+  def gamma_p(a,_z) when a<0.0, do: raise ArgumentError, message: "Boost [gamma_p] invalid arg (a=#{a})"
+  def gamma_p(a,z) when is_float(a) and is_float(z), do: _gamma_p(a,z)
   def _gamma_p(_a,_z), do: "NIF library not loaded"
 
   @doc """
@@ -61,7 +62,8 @@ defmodule Exboost.Math do
 
   """
   @spec gamma_p_inv(a::float,p::float) :: float
-  def gamma_p_inv(a,p), do: _gamma_p_inv(a,p)
+  def gamma_p_inv(a,_p) when a<0.0, do: raise ArgumentError, message: "Boost [gamma_p_inv] invalid arg (a=#{a})"
+  def gamma_p_inv(a,p) when is_float(a) and is_float(p), do: _gamma_p_inv(a,p)
   def _gamma_p_inv(_a,_z), do: "NIF library not loaded"
 
   @doc """
@@ -77,7 +79,8 @@ defmodule Exboost.Math do
 
   """
   @spec tgamma_lower(a::float,z::float) :: float
-  def tgamma_lower(a,z), do: _tgamma_lower(a,z)
+  def tgamma_lower(a,_z) when a<0.0, do: raise ArgumentError, message: "Boost [tgamma_lower] invalid arg (a=#{a})"
+  def tgamma_lower(a,z) when is_float(a) and is_float(z), do: _tgamma_lower(a,z)
   def _tgamma_lower(_a,_z), do: "NIF library not loaded"
 
   @doc """
@@ -93,7 +96,7 @@ defmodule Exboost.Math do
 
   """
   @spec tgamma(z::float) :: float
-  def tgamma(z), do: _tgamma(z)
+  def tgamma(z) when is_float(z), do: _tgamma(z)
   def _tgamma(_z), do: "NIF library not loaded"
 
 end

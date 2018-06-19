@@ -28,7 +28,7 @@ defmodule Exboost.MixProject do
   def project do
     [
       app: :exboost,
-      version: "0.1.7",
+      version: "0.2.0-alpha",
       elixir: "~> 1.6",
       start_permanent: false,
       compilers: [:make, :elixir, :app], # Add the make compiler
@@ -50,12 +50,6 @@ defmodule Exboost.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-#      {:boost,
-#        github: "boostorg/boost",
-#        tag: "boost-1.67.0",
-#        submodules: true,
-#        compile: "./bootstrap.sh --with-libraries=math; ./b2 headers; ./b2 link=static runtime-link=static threading=single stage",
-#        app: false},
       {:ex_doc, "~> 0.16", only: :dev, runtime: false}
     ]
   end
@@ -84,22 +78,6 @@ defmodule Mix.Tasks.Compile.Make do
   @shortdoc "Compiles with make"
 
   def run(_) do
-    try do
-      {result, _error_code} = System.cmd("git",["clone","--progress","-b","boost-1.67.0","--recursive","https://github.com/boostorg/boost.git", "deps/boost"])
-      Mix.shell.info result
-    rescue
-      _error -> IO.puts "WARNING: clonening failed. Directory already exists?"
-    end
-
-    {result, _error_code} = System.cmd("sh", ["bootstrap.sh", "--with-libraries=math"], cd: "deps/boost")
-    Mix.shell.info result
-
-    {result, _error_code} = System.cmd("env", ["-P",".","b2","headers"], cd: "deps/boost")
-    Mix.shell.info result
-
-    {result, _error_code} = System.cmd("env", ["-P",".","b2","link=static", "runtime-link=static", "threading=single", "stage"], cd: "deps/boost")
-    Mix.shell.info result
-
     {result, _error_code} = System.cmd("make", ["priv/libboostnif.so"], stderr_to_stdout: true)
     Mix.shell.info result
   end

@@ -1,9 +1,16 @@
 #
 VPATH = ./priv
 
+ifeq ($(BOOSTINCLUDE),)
+BOOSTINCLUDE := /usr/local/include
+endif
+ifeq ($(BOOSTLIB),)
+BOOSTLIB := /usr/local/lib
+endif
+
 ERLANG_PATH = $(shell erl -eval 'io:format("~s", [lists:concat([code:root_dir(), "/erts-", erlang:system_info(version), "/include"])])' -s init stop -noshell)
-CFLAGS = -I$(ERLANG_PATH) -Ideps/boost -fPIC -g -O3 -flto -mtune=generic -Wno-write-strings
-LDFLAGS = -shared -undefined dynamic_lookup -Ldeps/boost/stage/lib/ -lboost_math_c99
+CFLAGS = -I$(ERLANG_PATH) -I$(BOOSTINCLUDE) -fPIC -g -O3 -flto -mtune=generic -Wno-write-strings
+LDFLAGS = -shared -undefined dynamic_lookup $(BOOSTLIB)/libboost_math_c99.a $(BOOSTLIB)/libboost_random.a
 
 CC = g++
 

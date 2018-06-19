@@ -28,7 +28,7 @@ defmodule Exboost.MixProject do
   def project do
     [
       app: :exboost,
-      version: "0.2.0-alpha",
+      version: "0.2.0",
       elixir: "~> 1.6",
       start_permanent: false,
       compilers: [:make, :elixir, :app], # Add the make compiler

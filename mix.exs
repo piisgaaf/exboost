@@ -28,7 +28,7 @@ defmodule Exboost.MixProject do
   def project do
     [
       app: :exboost,
-      version: "0.2.0",
+      version: "0.2.2",
       elixir: "~> 1.6",
       start_permanent: false,
       compilers: [:make, :elixir, :app], # Add the make compiler
@@ -65,7 +65,7 @@ defmodule Exboost.MixProject do
     [
       maintainers: [ "Pieter Rijken" ],
       licenses: [ "Boost 1.0" ],
-      files: [ "lib", "mix.exs", "test", "README*", "LICENSE*", "priv/libboostnif.so" ],
+      files: [ "lib", "mix.exs", "test", "README*", "LICENSE*", "priv/boostnif.c", "Makefile" ],
       links: %{ "GitHub" => "https://github.com/piisgaaf/exboost" }
     ]
   end

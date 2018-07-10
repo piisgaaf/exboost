@@ -29,7 +29,11 @@ defmodule Exboost.Math do
   
   def init() do
     path = :filename.join(:code.priv_dir(unquote(app)), 'libboostnif')
-    :ok = :erlang.load_nif(path, 0)
+    case :erlang.load_nif(path, 0) do
+      :ok -> :ok
+      {:error,{:load_failed,_message}} ->
+        :ok = :erlang.load_nif('priv/libboostnif',0)
+    end
   end
 
   @doc """

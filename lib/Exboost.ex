@@ -28,7 +28,12 @@ defmodule Exboost.Math do
   app = Mix.Project.config[:app]
   
   def init() do
-    path = :filename.join(:code.priv_dir(unquote(app)), 'libboostnif')
+    path = :filename.join(
+            case :code.priv_dir(unquote(app)) do
+              {:error,_} -> System.get_env("EXBOOSTNIFDIR")
+              privdir -> privdir
+            end,
+            'libboostnif')
     case :erlang.load_nif(path, 0) do
       :ok -> :ok
       {:error,{:load_failed,_message}} ->

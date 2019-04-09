@@ -49,6 +49,22 @@ static ERL_NIF_TERM _tgamma(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
     }
 }
 
+static ERL_NIF_TERM _lgamma(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
+{
+    double z;
+    long double res;
+    
+    enif_get_double(env, argv[0], &z);
+
+    try {
+        res = boost::math::lgamma((long double)z);
+        return enif_make_double(env, res);
+    }
+    catch(boost::exception const& ex) {
+        return enif_raise_exception(env, enif_make_atom(env,"boostError"));
+    }
+}
+
 static ERL_NIF_TERM _gamma_p(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
 {
     double a;
@@ -106,6 +122,7 @@ static ERL_NIF_TERM _gamma_p_inv(ErlNifEnv* env, int argc, const ERL_NIF_TERM ar
 static ErlNifFunc nif_funcs[] =
 {
   {"_tgamma", 1, _tgamma},
+  {"_lgamma", 1, _lgamma},
   {"_gamma_p", 2, _gamma_p},
   {"_tgamma_lower", 2, _tgamma_lower},
   {"_gamma_p_inv", 2, _gamma_p_inv}

@@ -108,4 +108,17 @@ defmodule Exboost.Math do
   def tgamma(z) when is_float(z), do: _tgamma(z)
   def _tgamma(_z), do: "NIF library not loaded"
 
+  @doc """
+  Provides the log gamma function.
+  
+  ## Examples
+
+      iex> Exboost.Math.lgamma(2.0)
+      0.0
+
+  """
+  @spec lgamma(z::float) :: float
+  def lgamma(z) when is_float(z), do: _lgamma(z)
+  def _lgamma(_z), do: "NIF library not loaded"
+
 end

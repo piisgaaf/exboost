@@ -28,7 +28,7 @@ defmodule Exboost.MixProject do
   def project do
     [
       app: :exboost,
-      version: "0.2.3",
+      version: "0.2.4",
       elixir: "~> 1.6",
       start_permanent: false,
       compilers: [:make, :elixir, :app], # Add the make compiler
@@ -50,7 +50,7 @@ defmodule Exboost.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:ex_doc, "~> 0.16", only: :dev, runtime: false}
+      {:ex_doc, "~> 0.19", only: :dev, runtime: false}
     ]
   end
 

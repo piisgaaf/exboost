@@ -119,12 +119,29 @@ static ERL_NIF_TERM _gamma_p_inv(ErlNifEnv* env, int argc, const ERL_NIF_TERM ar
     }
 }
 
+static ERL_NIF_TERM _digamma(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
+{
+    double z;
+    long double res;
+    
+    enif_get_double(env, argv[0], &z);
+
+    try {
+        res = boost::math::digamma((long double)z);
+        return enif_make_double(env, res);
+    }
+    catch(boost::exception const& ex) {
+        return enif_raise_exception(env, enif_make_atom(env,"boostError"));
+    }
+}
+
 static ErlNifFunc nif_funcs[] =
 {
   {"_tgamma", 1, _tgamma},
   {"_lgamma", 1, _lgamma},
   {"_gamma_p", 2, _gamma_p},
   {"_tgamma_lower", 2, _tgamma_lower},
-  {"_gamma_p_inv", 2, _gamma_p_inv}
+  {"_gamma_p_inv", 2, _gamma_p_inv},
+  {"_digamma", 1, _digamma}
 };
 ERL_NIF_INIT(Elixir.Exboost.Math,nif_funcs,NULL,NULL,NULL,NULL)

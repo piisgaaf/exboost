@@ -28,9 +28,10 @@ defmodule Exboost.MixProject do
   def project do
     [
       app: :exboost,
-      version: "0.2.5",
+      version: "0.2.6",
       elixir: "~> 1.6",
       start_permanent: false,
+      build_embedded: Mix.env == :prod,
       compilers: [:make, :elixir, :app], # Add the make compiler
       deps: deps(),
       ## Hex stuff:
@@ -50,7 +51,7 @@ defmodule Exboost.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:ex_doc, "~> 0.19", only: :dev, runtime: false}
+      {:ex_doc, "~> 0.18.0", only: :dev, runtime: false, override: true}
     ]
   end
 

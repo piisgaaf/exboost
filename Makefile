@@ -11,6 +11,9 @@ else
 BOOSTLIB := /usr/local/lib
 endif
 endif
+ifeq ($(CC),)
+CC := g++-12
+endif
 
 ERLANG_PATH = $(shell erl -eval 'io:format("~s", [lists:concat([code:root_dir(), "/erts-", erlang:system_info(version), "/include"])])' -s init stop -noshell)
 CFLAGS = -I$(ERLANG_PATH) -I$(BOOSTINCLUDE) -fPIC -g -O3 -flto -mtune=generic -Wno-write-strings
@@ -20,8 +23,6 @@ UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S),Darwin)
 LDFLAGS += -undefined dynamic_lookup
 endif
-
-CC = g++
 
 SRCS = boostnif.c
 OBJS = $(SRCS:.c=.o)

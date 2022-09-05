@@ -28,8 +28,8 @@ defmodule Exboost.MixProject do
   def project do
     [
       app: :exboost,
-      version: "0.2.6",
-      elixir: "~> 1.6",
+      version: "0.2.7",
+      elixir: "~> 1.13",
       start_permanent: false,
       build_embedded: Mix.env == :prod,
       compilers: [:make, :elixir, :app], # Add the make compiler
@@ -51,7 +51,7 @@ defmodule Exboost.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:ex_doc, "~> 0.18.0", only: :dev, runtime: false, override: true}
+      {:ex_doc, "~> 0.24", only: :dev, runtime: false, override: true}
     ]
   end
 
@@ -65,7 +65,7 @@ defmodule Exboost.MixProject do
   defp package() do
     [
       maintainers: [ "Pieter Rijken" ],
-      licenses: [ "Boost 1.0" ],
+      licenses: [ "BSL-1.0" ],
       files: [ "lib", "mix.exs", "test", "README*", "LICENSE*", "priv/boostnif.c", "Makefile" ],
       links: %{ "GitHub" => "https://github.com/piisgaaf/exboost" }
     ]

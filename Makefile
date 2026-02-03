@@ -1,6 +1,4 @@
 #
-VPATH = ./priv
-
 ifeq ($(BOOSTINCLUDE),)
 BOOSTINCLUDE := /usr/local/include
 endif
@@ -24,7 +22,7 @@ ifeq ($(UNAME_S),Darwin)
 LDFLAGS += -undefined dynamic_lookup
 endif
 
-SRCS = boostnif.c
+SRCS = priv/boostnif.c
 OBJS = $(SRCS:.c=.o)
 
 priv/libboostnif.so: $(OBJS)

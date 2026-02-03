@@ -28,7 +28,7 @@ defmodule Exboost.MixProject do
   def project do
     [
       app: :exboost,
-      version: "0.2.7",
+      version: "0.2.8",
       elixir: "~> 1.13",
       start_permanent: false,
       build_embedded: Mix.env == :prod,
@@ -61,7 +61,7 @@ defmodule Exboost.MixProject do
     Provides an elixir wrapper for the C++ Boost library.
     """
   end
-  
+
   defp package() do
     [
       maintainers: [ "Pieter Rijken" ],

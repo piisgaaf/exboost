@@ -26,24 +26,24 @@ defmodule Exboost.Math do
   @on_load :init
 
   app = Mix.Project.config[:app]
-  
+
   def init() do
     path = :filename.join(
             case :code.priv_dir(unquote(app)) do
               {:error,_} -> System.get_env("EXBOOSTNIFDIR")
               privdir -> privdir
             end,
-            'libboostnif')
+            "libboostnif")
     case :erlang.load_nif(path, 0) do
       :ok -> :ok
       {:error,{:load_failed,_message}} ->
-        :ok = :erlang.load_nif('priv/libboostnif',0)
+        :ok = :erlang.load_nif("priv/libboostnif",0)
     end
   end
 
   @doc """
   Provides the regularized lower incomplete gamma function.
-  
+
   ## Examples
 
       iex> Exboost.Math.gamma_p(0.234,2.3)
@@ -54,7 +54,7 @@ defmodule Exboost.Math do
 
   """
   @spec gamma_p(a::float,z::float) :: float
-  def gamma_p(a,_z) when a<0.0, do: raise ArgumentError, message: "Boost [gamma_p] invalid arg (a=#{a})"
+  def gamma_p(a,_z) when a<0.0, do: raise(ArgumentError, message: "Boost [gamma_p] invalid arg (a=#{a})")
   def gamma_p(a,z) when is_float(a) and is_float(z), do: _gamma_p(a,z)
   def _gamma_p(_a,_z), do: "NIF library not loaded"
 
@@ -71,34 +71,34 @@ defmodule Exboost.Math do
 
   """
   @spec gamma_p_inv(a::float,p::float) :: float
-  def gamma_p_inv(a,_p) when a<0.0, do: raise ArgumentError, message: "Boost [gamma_p_inv] invalid arg (a=#{a})"
+  def gamma_p_inv(a,_p) when a<0.0, do: raise(ArgumentError, message: "Boost [gamma_p_inv] invalid arg (a=#{a})")
   def gamma_p_inv(a,p) when is_float(a) and is_float(p), do: _gamma_p_inv(a,p)
   def _gamma_p_inv(_a,_z), do: "NIF library not loaded"
 
   @doc """
   Provides the non-regularized lower incomplete gamma function.
-  
+
   ## Examples
 
       iex> Exboost.Math.tgamma_lower(0.234,2.3)
-      3.8461476736289315
+      3.846147673628932
 
       iex> Exboost.Math.tgamma_lower(5.0,0.0)
       0.0
 
   """
   @spec tgamma_lower(a::float,z::float) :: float
-  def tgamma_lower(a,_z) when a<0.0, do: raise ArgumentError, message: "Boost [tgamma_lower] invalid arg (a=#{a})"
+  def tgamma_lower(a,_z) when a<0.0, do: raise(ArgumentError, message: "Boost [tgamma_lower] invalid arg (a=#{a})")
   def tgamma_lower(a,z) when is_float(a) and is_float(z), do: _tgamma_lower(a,z)
   def _tgamma_lower(_a,_z), do: "NIF library not loaded"
 
   @doc """
   Provides the gamma function.
-  
+
   ## Examples
 
       iex> Exboost.Math.tgamma(1.5)
-      0.886226925452758
+      0.8862269254527579
 
       iex> Exboost.Math.tgamma(3.0)
       2.0
@@ -110,7 +110,7 @@ defmodule Exboost.Math do
 
   @doc """
   Provides the digamma function.
-  
+
   ## Examples
 
       iex> Exboost.Math.digamma(1.5)
@@ -123,7 +123,7 @@ defmodule Exboost.Math do
 
   @doc """
   Provides the log gamma function.
-  
+
   ## Examples
 
       iex> Exboost.Math.lgamma(2.0)

@@ -10,7 +10,7 @@ BOOSTLIB := /usr/local/lib
 endif
 endif
 ifeq ($(CC),)
-CC := g++-12
+CC := c++
 endif
 
 ERLANG_PATH = $(shell erl -eval 'io:format("~s", [lists:concat([code:root_dir(), "/erts-", erlang:system_info(version), "/include"])])' -s init stop -noshell)

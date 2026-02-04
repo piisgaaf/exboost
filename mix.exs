@@ -28,15 +28,15 @@ defmodule Exboost.MixProject do
   def project do
     [
       app: :exboost,
-      version: "0.2.8",
-      elixir: "~> 1.13",
+      version: "0.3.0",
+      elixir: "~> 1.19",
       start_permanent: false,
       build_embedded: Mix.env == :prod,
       compilers: [:make, :elixir, :app], # Add the make compiler
       deps: deps(),
       ## Hex stuff:
-      description: description(),
-      package: package(),
+      description: hex_description(),
+      package: hex_package(),
       name: "ExBoost",
       source_url: "https://github.com/piisgaaf/exboost"
     ]
@@ -51,18 +51,17 @@ defmodule Exboost.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:ex_doc, "~> 0.24", only: :dev, runtime: false, override: true}
     ]
   end
 
   # Hex Package Manager stuff:
-  defp description() do
+  defp hex_description() do
     """
     Provides an elixir wrapper for the C++ Boost library.
     """
   end
 
-  defp package() do
+  defp hex_package() do
     [
       maintainers: [ "Pieter Rijken" ],
       licenses: [ "BSL-1.0" ],

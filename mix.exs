@@ -28,12 +28,10 @@ defmodule Exboost.MixProject do
   def project do
     [
       app: :exboost,
-      version: "0.3.3",
+      version: "0.3.4",
       elixir: "~> 1.19",
       start_permanent: false,
-      build_embedded: Mix.env == :prod,
-      compilers: [:elixir_make] ++ Mix.compilers(), # Add the make compiler
-      make_targets: ["priv/libboostnif.so"],
+      compilers: [:elixir_make] ++ Mix.compilers(),
       make_clean: ["clean"],
       deps: deps(),
       ## Hex stuff:

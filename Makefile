@@ -1,5 +1,10 @@
 #
-NIF = priv/libboostnif.so
+PRIV_DIR ?= priv
+ifneq ($(MIX_APP_PATH),)
+PRIV_DIR := $(MIX_APP_PATH)/priv
+endif
+
+NIF = $(PRIV_DIR)/libboostnif.so
 
 ifeq ($(BOOSTINCLUDE),)
 BOOSTINCLUDE := /usr/local/include
@@ -27,11 +32,10 @@ endif
 SRCS = priv/boostnif.c
 OBJS = $(SRCS:.c=.o)
 
-all: $(NIF)
 $(NIF): $(OBJS)
 	$(CC) -o $@ $^ $(CFLAGS) $(LDFLAGS)
 
 .PHONY: clean
 
 clean:
-	rm -f $(NIF)
+	rm -f priv/*.o $(NIF)

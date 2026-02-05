@@ -36,8 +36,7 @@ defmodule Exboost.Math do
             "libboostnif")
     case :erlang.load_nif(path, 0) do
       :ok -> :ok
-      {:error,{:load_failed,_message}} ->
-        :ok = :erlang.load_nif(~c"priv/libboostnif",0)
+      {:error,reason} -> {:error,reason}
     end
   end
 

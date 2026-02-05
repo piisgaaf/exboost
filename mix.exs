@@ -32,7 +32,7 @@ defmodule Exboost.MixProject do
       elixir: "~> 1.19",
       start_permanent: false,
       build_embedded: Mix.env == :prod,
-      compilers: [:make, :elixir, :app], # Add the make compiler
+      compilers: [:elixir_make] ++ Mix.compilers(), # Add the make compiler
       deps: deps(),
       ## Hex stuff:
       description: hex_description(),
@@ -51,7 +51,8 @@ defmodule Exboost.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:ex_doc, "~> 0.40", only: :dev, runtime: false}
+      {:ex_doc, "~> 0.40", only: :dev, runtime: false},
+      {:elixir_make, "~> 0.9", runtime: false}
     ]
   end
 
@@ -71,15 +72,4 @@ defmodule Exboost.MixProject do
     ]
   end
 
-end
-
-defmodule Mix.Tasks.Compile.Make do
-  use Mix.Task.Compiler
-
-  @shortdoc "Compiles with make"
-
-  def run(_) do
-    {result, _error_code} = System.cmd("make", ["priv/libboostnif.so"], stderr_to_stdout: true)
-    Mix.shell.info result
-  end
 end

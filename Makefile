@@ -29,7 +29,7 @@ OBJS = $(SRCS:.c=.o)
 
 all: $(NIF)
 $(NIF): $(OBJS)
-	$(CC) -o $@ $< $(CFLAGS) $(LDFLAGS)
+	$(CC) -o $@ $^ $(CFLAGS) $(LDFLAGS)
 
 .PHONY: clean
 

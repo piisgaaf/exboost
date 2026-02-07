@@ -28,12 +28,13 @@ defmodule Exboost.MixProject do
   def project do
     [
       app: :exboost,
-      version: "0.3.4",
-      elixir: "~> 1.19",
+      version: "0.3.5",
+      elixir: ">= 1.15.8",
       start_permanent: false,
       compilers: [:elixir_make] ++ Mix.compilers(),
       make_clean: ["clean"],
       deps: deps(),
+
       ## Hex stuff:
       description: hex_description(),
       package: hex_package(),
@@ -51,8 +52,8 @@ defmodule Exboost.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:ex_doc, "~> 0.40", only: :dev, runtime: false},
-      {:elixir_make, "~> 0.9", runtime: false}
+      {:elixir_make, "~> 0.9", runtime: false},
+      {:ex_doc, ">= 0.40.1", only: :dev, runtime: false}
     ]
   end
 

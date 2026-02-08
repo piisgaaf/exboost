@@ -28,11 +28,17 @@ defmodule Exboost.MixProject do
   def project do
     [
       app: :exboost,
-      version: "0.3.5",
+      version: "0.3.8",
       elixir: ">= 1.15.8",
       start_permanent: false,
       compilers: [:elixir_make] ++ Mix.compilers(),
       make_clean: ["clean"],
+      make_env: %{
+        "BOOSTCC"      => System.get_env("BOOSTCC")      || "c++",
+        "BOOSTMT"      => System.get_env("BOOSTMT")      || "",
+        "BOOSTINCLUDE" => System.get_env("BOOSTINCLUDE") || "",
+        "BOOSTLIB"     => System.get_env("BOOSTLIB")     || ""
+      },
       deps: deps(),
 
       ## Hex stuff:

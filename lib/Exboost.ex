@@ -133,4 +133,56 @@ defmodule Exboost.Math do
   def lgamma(z) when is_float(z), do: _lgamma(z)
   def _lgamma(_z), do: :erlang.nif_error(:nif_library_not_loaded)
 
+  @doc """
+  Provides the incomplete beta-function.
+
+  ## Examples
+
+      iex> Exboost.Math.beta(1.0,1.0,1.0)
+      1.0
+
+  """
+  @spec beta(a::float,b::float,z::float) :: float
+  def beta(a,b,z) when is_float(a) and is_float(b) and is_float(z), do: _beta(a,b,z)
+  def _beta(_a,_b,_z), do: :erlang.nif_error(:nif_library_not_loaded)
+
+  @doc """
+  Provides the complementary incomplete beta-function.
+
+  ## Examples
+
+      iex> Exboost.Math.betac(1.0,1.0,1.0)
+      0.0
+
+  """
+  @spec betac(a::float,b::float,z::float) :: float
+  def betac(a,b,z) when is_float(a) and is_float(b) and is_float(z), do: _betac(a,b,z)
+  def _betac(_a,_b,_z), do: :erlang.nif_error(:nif_library_not_loaded)
+
+  @doc """
+  Provides the normalised incomplete beta-function.
+
+  ## Examples
+
+      iex> Exboost.Math.ibeta(4.0,2.0,0.5)
+      0.1875
+
+  """
+  @spec ibeta(a::float,b::float,z::float) :: float
+  def ibeta(a,b,z) when is_float(a) and is_float(b) and is_float(z), do: _ibeta(a,b,z)
+  def _ibeta(_a,_b,_z), do: :erlang.nif_error(:nif_library_not_loaded)
+
+  @doc """
+  Provides the complementary normalised incomplete beta-function.
+
+  ## Examples
+
+      iex> Exboost.Math.ibetac(1.0,1.0,1.0)
+      0.0
+
+  """
+  @spec ibetac(a::float,b::float,z::float) :: float
+  def ibetac(a,b,z) when is_float(a) and is_float(b) and is_float(z), do: _ibetac(a,b,z)
+  def _ibetac(_a,_b,_z), do: :erlang.nif_error(:nif_library_not_loaded)
+
 end

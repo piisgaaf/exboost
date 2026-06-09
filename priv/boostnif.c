@@ -135,6 +135,86 @@ static ERL_NIF_TERM _digamma(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[]
     }
 }
 
+static ERL_NIF_TERM _beta(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
+{
+    double a;
+    double b;
+    double z;
+    long double res;
+    
+    enif_get_double(env, argv[0], &a);
+    enif_get_double(env, argv[1], &b);
+    enif_get_double(env, argv[2], &z);
+
+    try {
+        res = boost::math::beta((long double)a, (long double)b, (long double)z);
+        return enif_make_double(env, res);
+    }
+    catch(boost::exception const& ex) {
+        return enif_raise_exception(env, enif_make_atom(env,"boostError"));
+    }
+}
+
+static ERL_NIF_TERM _betac(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
+{
+    double a;
+    double b;
+    double z;
+    long double res;
+    
+    enif_get_double(env, argv[0], &a);
+    enif_get_double(env, argv[1], &b);
+    enif_get_double(env, argv[2], &z);
+
+    try {
+        res = boost::math::betac((long double)a, (long double)b, (long double)z);
+        return enif_make_double(env, res);
+    }
+    catch(boost::exception const& ex) {
+        return enif_raise_exception(env, enif_make_atom(env,"boostError"));
+    }
+}
+
+static ERL_NIF_TERM _ibeta(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
+{
+    double a;
+    double b;
+    double z;
+    long double res;
+    
+    enif_get_double(env, argv[0], &a);
+    enif_get_double(env, argv[1], &b);
+    enif_get_double(env, argv[2], &z);
+
+    try {
+        res = boost::math::ibeta((long double)a, (long double)b, (long double)z);
+        return enif_make_double(env, res);
+    }
+    catch(boost::exception const& ex) {
+        return enif_raise_exception(env, enif_make_atom(env,"boostError"));
+    }
+}
+
+static ERL_NIF_TERM _ibetac(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
+{
+    double a;
+    double b;
+    double z;
+    long double res;
+    
+    enif_get_double(env, argv[0], &a);
+    enif_get_double(env, argv[1], &b);
+    enif_get_double(env, argv[2], &z);
+
+    try {
+        res = boost::math::ibetac((long double)a, (long double)b, (long double)z);
+        return enif_make_double(env, res);
+    }
+    catch(boost::exception const& ex) {
+        return enif_raise_exception(env, enif_make_atom(env,"boostError"));
+    }
+}
+
 static ErlNifFunc nif_funcs[] =
 {
   {"_tgamma", 1, _tgamma},
@@ -142,6 +222,10 @@ static ErlNifFunc nif_funcs[] =
   {"_gamma_p", 2, _gamma_p},
   {"_tgamma_lower", 2, _tgamma_lower},
   {"_gamma_p_inv", 2, _gamma_p_inv},
-  {"_digamma", 1, _digamma}
+  {"_digamma", 1, _digamma},
+  {"_beta", 3, _beta},
+  {"_betac", 3, _betac},
+  {"_ibeta", 3, _ibeta},
+  {"_ibetac", 3, _ibetac}
 };
 ERL_NIF_INIT(Elixir.Exboost.Math,nif_funcs,NULL,NULL,NULL,NULL)
